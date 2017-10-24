@@ -1,4 +1,4 @@
-docker run -dt --name Abathur -p 3000:3000 -v /home/abathur:/root -w /root python:2-slim
+docker run -dt --name Abathur -p 3000:3000 -v /home/abathur:/root -w /root python:2-slim python
 docker exec Abathur pip install flask
 file=mktemp
 cat <<EOF > "${file}"
@@ -12,4 +12,3 @@ EOF
 docker cp "${file}" Abathur:/root/hello.py
 \rm "${file}"
 docker exec -e FLASK_APP=hello.py Abathur python -m flask run --host=0.0.0.0 -p 3000
-
